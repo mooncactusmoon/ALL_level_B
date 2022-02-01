@@ -4,11 +4,9 @@
         <table width="100%">
             <tbody>
                 <tr class="yel">
-                    <td width="45%"><?=$DB->header;?></td>
-                    <td width="25%"><?=$DB->append;?></td>
-                    <td width="7%">顯示</td>
-                    <td width="7%">刪除</td>
-                    <td></td>
+                    <td width="80%"><?=$DB->header;?></td>
+                    <td width="10%">顯示</td>
+                    <td width="10%">刪除</td>
                 </tr>
                 <?php
                 $rows=$DB->all();
@@ -18,20 +16,14 @@
                 ?>
                 <tr>
                     <td>
-                        <img src="./img/<?=$row['img'];?>" alt="<?=$row['text'];?>" style="width:300px;height:30px">
+                       <input type="text" name="text[]" value="<?=$row['text'];?>" style="width:90%">
                     </td>
                     <td>
-                        <input type="text" name="text[]" value="<?=$row['text'];?>">
-                    </td>
-                    <td>
-                        <input type="radio" name="sh" value="<?=$row['id']?>"<?=$checked;?>>
+                        <input type="checkbox" name="sh[]" value="<?=$row['id']?>" <?=$checked;?>>
                     </td>
                     <td>
                         <input type="checkbox" name="del[]" value="<?=$row['id']?>">
-                    </td>
-                    <td>
                         <input type="hidden" name="id[]" value="<?=$row['id']?>">
-                        <input type="button" value="更新圖片" onclick="op('#cover','#cvr','modal/upload.php?do=<?=$DB->table;?>&id=<?=$row['id'];?>')">
                     </td>
                 </tr>
                 <?php
