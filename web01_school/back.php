@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html
+﻿<?php
+include_once "base.php";
+?>
+<!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0068)?do=admin&redo=title -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -20,7 +23,7 @@
 			<div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;"></div>
 		</div>
 	</div>
-	<iframe style="display:none;" name="back" id="back"></iframe>
+	
 	<div id="main">
 		<a title="" href="?">
 			<div class="ti" style="background:url(&#39;use/&#39;); background-size:cover;"></div>
@@ -36,35 +39,35 @@
 						<div class="mainmu">
 							網站標題管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=ad">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=ad">
 						<div class="mainmu">
 							動態文字廣告管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=mvim">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=mvim">
 						<div class="mainmu">
 							動畫圖片管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=image">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=image">
 						<div class="mainmu">
 							校園映象資料管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=total">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=total">
 						<div class="mainmu">
 							進站總人數管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=bottom">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=bottom">
 						<div class="mainmu">
 							頁尾版權資料管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=news">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=news">
 						<div class="mainmu">
 							最新消息資料管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=admin">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin">
 						<div class="mainmu">
 							管理者帳號管理 </div>
 					</a>
-					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=admin&redo=menu">
+					<a style="color:#000; font-size:13px; text-decoration:none;" href="?do=menu">
 						<div class="mainmu">
 							選單管理 </div>
 					</a>
@@ -73,7 +76,7 @@
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
 					<span class="t">進站總人數 :
-						1 </span>
+					<?=$Total->find(1)['total'];?>  </span>
 				</div>
 			</div>
 			<div class="di"
@@ -90,34 +93,17 @@
 						</tr>
 					</tbody>
 				</table>
-				<div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
-					<p class="t cent botli">網站標題管理</p>
-					<form method="post" target="back" action="?do=tii">
-						<table width="100%">
-							<tbody>
-								<tr class="yel">
-									<td width="45%">網站標題</td>
-									<td width="23%">替代文字</td>
-									<td width="7%">顯示</td>
-									<td width="7%">刪除</td>
-									<td></td>
-								</tr>
-							</tbody>
-						</table>
-						<table style="margin-top:40px; width:70%;">
-							<tbody>
-								<tr>
-									<td width="200px"><input type="button"
-											onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;view.php?do=title&#39;)"
-											value="新增網站標題圖片"></td>
-									<td class="cent"><input type="submit" value="修改確定"><input type="reset" value="重置">
-									</td>
-								</tr>
-							</tbody>
-						</table>
 
-					</form>
-				</div>
+				<?php
+					$do=(!empty($_GET['do']))?$_GET['do']:"title";
+					$file="./back/".$do.".php";
+					if(file_exists($file)){
+						include $file;
+					}else{
+						include "./back/title.php";
+					}
+				?>
+				
 			</div>
 			<div id="alt"
 				style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;">

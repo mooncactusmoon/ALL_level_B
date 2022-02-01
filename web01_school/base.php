@@ -2,7 +2,7 @@
 date_default_timezone_set("Asia/Taipei");
 session_start();
 class DB{
-    protected $dsn="mysql:host=localhost;charset=utf8;dbname=db01";
+    protected $dsn="mysql:host=localhost;charset=utf8;dbname=web01";
     protected $root="root";
     protected $password="";
     protected $table;
@@ -69,9 +69,9 @@ class DB{
             $sql.= implode(" AND " ,$tmp);
         }else{
 
-            $sql.=" `id`=`$id`";
+            $sql.=" `id`='$id'";
         }
-        //echo $sql;
+        // echo $sql;
         return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 
     }
@@ -84,7 +84,7 @@ class DB{
             }
             $sql.=implode(" && ",$tmp);
         }else{
-            $sql.=" `id`=`$id`";
+            $sql.=" `id`='$id'";
         }
         //echo $sql;
         return $this->pdo->exec($sql);
@@ -134,5 +134,23 @@ function dd($array){
     echo "</pre>";
 }
 
-$User=new DB('user');
+$Ad=new DB('ad');
+$Admin=new DB('admin');
+$Bottom=new DB('bottom');
+$Image=new DB('image');
+$Menu=new DB('menu');
+$Mvim=new DB('mvim');
+$News=new DB('news');
+$Title=new DB('title');
+$Total=new DB('total');
+
+// echo $Total->find(1)['total'];
+
+if(!isset($_SESSION['total'])){
+    $total=$Total->find(1);
+    $total['total']++;
+    $Total->save($total);
+    $_SESSION['total']=$total['total'];
+}
+
 ?>
