@@ -15,12 +15,12 @@ foreach($_POST['id'] as $key=>$id){
                 $data['sh']=($_POST['sh']==$id)?1:0;
             break;
             case "admin":
-                $date['acc']=$_POST['acc'][$key];
-                $date['pw']=$_POST['pw'][$key];
+                $data['acc']=$_POST['acc'][$key];
+                $data['pw']=$_POST['pw'][$key];
                 break;
             case "menu":
-                $date['name']=$_POST['name'][$key];
-                $date['href']=$_POST['href'][$key];
+                $data['name']=$_POST['name'][$key];
+                $data['href']=$_POST['href'][$key];
                 $data['sh']=(isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
                 break;
                 default: //ad.news.image.mvim
