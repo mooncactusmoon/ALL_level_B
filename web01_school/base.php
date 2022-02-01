@@ -38,7 +38,7 @@ class DB{
                 $this->title="動畫圖片管理";
                 $this->button="新增動畫圖片圖片";
                 $this->header="動畫圖片";
-                $this->append="動畫圖片";
+                $this->upload="動畫圖片";
             break;
             case "image":
                 $this->title="校園映像資料管理";
