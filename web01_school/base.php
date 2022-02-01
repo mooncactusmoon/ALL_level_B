@@ -5,14 +5,78 @@ class DB{
     protected $dsn="mysql:host=localhost;charset=utf8;dbname=web01";
     protected $root="root";
     protected $password="";
-    protected $table;
     protected $pdo;
+    public $table; //資料表名稱
+    public $title; //後台功能標題
+    public $button; //新增功能按鈕
+    public $header; //列表第一欄標題
+    public $append; //列表第二欄標題
+    public $upload; //更新圖片彈跳視窗
 
     public function __construct($table){
         $this->table=$table;
         $this->pdo=new PDO($this->dsn,$this->root,$this->password);
-
+        $this->setStr($table);
     }
+
+    //私有，不開放給外部使用
+    private function setStr($table){
+        switch($table){
+            case "title":
+                $this->title="網站標題管理";
+                $this->button="新增網站標題圖片";
+                $this->header="網站標題";
+                $this->append="替代文字";
+                $this->upload="網站標題圖片";
+            break;
+            case "ad":
+                $this->title="動態文字管理";
+                $this->button="新增動態文字圖片";
+                $this->header="動態文字廣告";
+            break;
+            case "mvim":
+                $this->title="動畫圖片管理";
+                $this->button="新增動畫圖片圖片";
+                $this->header="動畫圖片";
+                $this->append="動畫圖片";
+            break;
+            case "image":
+                $this->title="校園映像資料管理";
+                $this->button="新增校園映像資料圖片";
+                $this->header="校園映像資料圖片";
+                $this->append="校園映像圖片";
+            break;
+            case "total":
+                $this->title="進站總人數管理";
+                $this->button="";
+                $this->header="進站總人數:";
+            break;
+            case "bottom":
+                $this->title="頁尾版權管理";
+                $this->button="";
+                $this->header="頁尾版權資料";
+            break;
+            case "news":
+                $this->title="最新消息資料管理";
+                $this->button="新增最新消息資料";
+                $this->header="最新消息資料內容";
+            break;
+            case "admin":
+                $this->title="管理者帳號管理";
+                $this->button="新增管理者帳號";
+                $this->header="帳號";
+                $this->append="密碼";
+            break;
+            case "menu":
+                $this->title="主選單管理";
+                $this->button="新增主選單";
+                $this->header="主選單名稱";
+                $this->append="選單連結網址";
+            break;
+
+        }
+    }
+
 
     //all
     public function all(...$arg){
@@ -143,6 +207,38 @@ $Mvim=new DB('mvim');
 $News=new DB('news');
 $Title=new DB('title');
 $Total=new DB('total');
+
+
+$tt=$_GET['do']??''; //$tt=(isset($_GET['do']))?$_GET['do']:'';
+switch($tt){
+    case "ad":
+        $DB=$Ad;
+        break;
+    case "mvim":
+        $DB=$Mvim;
+        break;
+    case "image":
+        $DB=$Image;
+        break;
+    case "total":
+        $DB=$Total;
+        break;
+    case "bottom":
+        $DB=$Bottom;
+        break;
+    case "news":
+        $DB=$News;
+        break;
+    case "admin":
+        $DB=$Admin;
+        break;
+    case "menu":
+        $DB=$Menu;
+        break;
+    default:
+    $DB=$Title;
+    break;
+}
 
 // echo $Total->find(1)['total'];
 

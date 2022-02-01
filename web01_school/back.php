@@ -26,7 +26,8 @@ include_once "base.php";
 	
 	<div id="main">
 		<a title="" href="?">
-			<div class="ti" style="background:url(&#39;use/&#39;); background-size:cover;"></div>
+			<div class="ti" style="background:url(&#39;use/&#39;); background-size:cover;">
+		</div>
 			<!--標題-->
 		</a>
 		<div id="ms">
@@ -35,7 +36,7 @@ include_once "base.php";
 					<!--主選單放此-->
 					<span class="t botli">後台管理選單</span>
 					<a style="color:#000; font-size:13px; text-decoration:none;"
-						href="./Management page_files/Management page.htm">
+						href="?do=title">
 						<div class="mainmu">
 							網站標題管理 </div>
 					</a>
