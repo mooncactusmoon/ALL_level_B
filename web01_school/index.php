@@ -25,10 +25,9 @@ include_once "base.php";
 	</div>
 	
 	<div id="main">
-		<a title="" href="./home_files/home.htm">
-			<div class="ti" style="background:url(&#39;use/&#39;); background-size:cover;"></div>
+	<?php include "front/header.php";?>
 			<!--標題-->
-		</a>
+		
 		<div id="ms">
 			<div id="lf" style="float:left;">
 				<div id="menuput" class="dbor">
