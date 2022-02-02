@@ -12,7 +12,7 @@
                     <td width="10%"></td>
                 </tr>
                 <?php
-                $rows=$DB->all();
+                $rows=$DB->all(["parent"=>0]);
                 foreach($rows as $row){
                     $checked=($row['sh']==1)?'checked':'';
                 
@@ -35,7 +35,7 @@
                     </td>
                     <td>
                         <input type="hidden" name="id[]" value="<?=$row['id']?>">
-                        <input type="button" value="編輯次選單" onclick="op('#cover','#cvr','modal/menu.php?id=<?=$row['id'];?>')">
+                        <input type="button" value="編輯次選單" onclick="op('#cover','#cvr','modal/submenu.php?id=<?=$row['id'];?>')">
                     </td>
                 </tr>
                 <?php
