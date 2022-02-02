@@ -10,7 +10,12 @@
                     <td width="10%"></td>
                 </tr>
                 <?php
-                $rows=$DB->all();
+                $all=$DB->math('count',"*");//總比數
+                $div=3; //每頁三個
+                $pages=ceil($all/$div); //總頁數
+                $now=$_GET['p']??1; //當前頁碼
+                $start=($now-1)*$div;//計算從哪開始撈資料
+                $rows=$DB->all(" limit $start,$div");
                 foreach($rows as $row){
                     $checked=($row['sh']==1)?'checked':'';
                 
@@ -36,6 +41,27 @@
             </tbody>
             
         </table>
+
+        <!-- 分頁 -->
+        <div class="cent">
+        <?php
+            if(($now-1)>0){
+                $p=$now-1; //上頁頁碼
+                echo "<a href='?do={$DB->table}&p=$p'>&lt;</a>";
+            }
+            for($i=1;$i<=$pages;$i++){
+                //判斷當前頁面字型大小
+                $font=($i==$now)?"24px":"16px";
+                echo "<a href='?do={$DB->table}&p=$i'style='font-size:$font'>$i</a>";
+            }
+            if(($now+1)<=$pages){
+                $p=$now+1; //下頁頁碼
+                echo "<a href='?do={$DB->table}&p=$p'>&gt;</a>";
+            }
+        ?>
+        </div>
+
+        <!-- 分頁end -->
         <table style="margin-top:40px; width:70%;">
             <tbody>
                 <tr>

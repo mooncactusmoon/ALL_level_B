@@ -111,14 +111,31 @@ class DB{
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
     //math
-    public function math($math,$col,...$arg){
-        $sql="select $math(`$col`) from $this->table ";
-        if(!empty($arg[0])){
-            foreach($arg[0] as $key =>$value){
-                $tmp[]="`$key`='$value'";
-            }
-            $sql.=" where ". implode(" AND ",$tmp);
+    public function math($method,$col,...$arg){
+        $sql="select $method($col) from $this->table ";
+        switch(count($arg)){
+            case 2:
+                foreach($arg[0] as $key => $value){
+                    $tmp[]="`$key`='$value'";
+                }
+
+                $sql .=" WHERE ".implode(" AND ",$tmp)." ".$arg[1];
+            break;
+            case 1:
+                if(is_array($arg[0])){
+                    foreach($arg[0] as $key => $value){
+                        $tmp[]="`$key`='$value'";
+                    }
+                    $sql .=" WHERE ".implode(" AND ",$tmp);
+                }else{
+
+                    $sql .=$arg[0];
+
+                }
+
+            break;
         }
+        // echo $sql;
         //使用fetchColumn()來取回第一欄位的資料，因為這個SQL語法
         //只有select 一個欄位的資料，因此這個函式會直接回傳計算的結果出來
         return $this->pdo->query($sql)->fetchColumn();
