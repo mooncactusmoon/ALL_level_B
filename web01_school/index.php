@@ -33,6 +33,29 @@ include_once "base.php";
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">主選單區</span>
+					<?php
+					$mains=$Menu->all(['sh'=>1,'parent'=>0]);
+
+					foreach($mains as $main){
+						//調整一下html元素和內容的關係，並且利用到題組本身提供的class
+						echo "<div class='mainmu'>";
+
+						echo "<a href='{$main['href']}'>{$main['name']}</a>";
+						if($Menu->math('count','*',['parent'=>$main['id']])>0){
+						    //在有次選單的主選單區塊中再建立一個class為mw的div區塊
+							echo "  <div class='mw'>";
+							//撈出該主選單的所有次選單
+							$subs=$Menu->all(['parent'=>$main['id']]);
+							foreach($subs as $sub){
+								echo "<div class='mainmu2'>";
+								echo "<a href='{$sub['href']}'>{$sub['name']}</a>";
+								echo "</div>";
+							}
+							echo "</div>";
+						}
+						echo "</div>";
+					}
+					?>
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
 					<span class="t">進站總人數 :

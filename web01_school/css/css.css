@@ -75,7 +75,28 @@ body
 	line-height:30px;
 	padding:2px 10px 2px 10px;
 	margin:7px 1px 7px 1px;
+
+	/* 增加高度避免內容被撐開 */
+	height:30px;
 }
+/* 增加.mw的css設定來調整次選單的位置&寬度 並預設為不顯示，有hover才出現 */
+.mw{
+	display:none;
+	position:absolute;
+	top:21px;
+	left:100px;
+	width:150px;
+	z-index: 999;
+}
+/*以下兩個css設定非必要，只是增加視覺效果及操作感*/
+.mainmu a{
+    display:block;
+    text-decoration:none;
+}
+.mainmu a:hover{
+    text-decoration:underline;
+}
+/*  */
 .mainmu:hover
 {
 	background:url("../icon/menu2.fw.png") center no-repeat;
