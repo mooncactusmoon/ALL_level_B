@@ -74,12 +74,34 @@ include_once "base.php";
 					onclick="lo(&#39;?do=admin&#39;)">管理登入</button>
 				<div style="width:89%; height:480px;" class="dbor">
 					<span class="t botli">校園映象區</span>
+					<!-- 建立div放置up.jpg,並建立onclick事件啟用pp(1)函式 -->
+					<div class="t" onclick="pp(1)"><img src="icon/up.jpg"></div>
+					<?php
+					//撈出所有顯式的校園映像
+					$imgs=$Image->all(['sh'=>1]);
+					foreach($imgs as $key =>$img){
+					?>
+					<!-- 內建js會用‵.im‵來使所有圖片先隱藏。`ssaa`+字串作為id，所以用迴圈的\$key來建置每張圖片不同的id -->
+					<div class="im cent" id="ssaa<?=$key;?>">
+						<!-- 題目要求圖片要有150px*103px -->
+						<img src="img/<?=$img['img'];?>" style="width:150px;height:103px;margin:1px">
+					</div>
+					<?php	
+					}
+					?>
+					<!-- 建立一個div放置dn.jpg，並建立onclick啟用pp(2) -->
+					<div class="t" onclick="pp(2)"><img src="icon/dn.jpg" alt=""></div>
 					<script>
-						var nowpage = 0, num = 0;
+						var nowpage = 0;
+						//num用來記錄有多少張圖片要顯示，所以要用php計算圖片數量
+						var num = <?=$Image->math("count",'*',['sh'=>1]);?>;
 						function pp(x) {
 							var s, t;
 							if (x == 1 && nowpage - 1 >= 0) { nowpage--; }
-							if (x == 2 && (nowpage + 1) * 3 <= num * 1 + 3) { nowpage++; }
+							
+							//原本的js向下輪播有錯，要修改
+							if (x == 2 && (nowpage + 3) <= num) { nowpage++; }
+							
 							$(".im").hide()
 							for (s = 0; s <= 2; s++) {
 								t = s * 1 + nowpage * 1;
