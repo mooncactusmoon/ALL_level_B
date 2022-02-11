@@ -4,8 +4,8 @@ session_start();
 
 class DB{
     protected $dsn="mysql:host=localhost;charset=utf8;dbname=web04";
-    protected $table;
     protected $pdo;
+    public $table;
 
     public function __construct($table)
     {
