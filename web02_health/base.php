@@ -131,6 +131,22 @@ function dd($array){
 }
 
 //連結資料表
-$Db=new DB('db');
+$News=new DB('news');
+$User=new DB('user');
+$View=new DB('view');
+$Log=new DB('log');
+$Que=new DB('que');
 
+
+if(!isset($_SESSION['view'])){
+    if($View->math('count','*',['date'=>date("Y-m-d")])>0){
+        $view=$View->find(['date'=>date("Y-m-d")]);
+        $view['total']++;
+        $View->save($view);
+        $_SESSION['view']=$_SESSION['total'];
+    }else{
+        $View->save(['date'=>date("Y-m-d"),'total'=>1]);
+        $_SESSION['view']=1;
+    }
+}
 ?>
