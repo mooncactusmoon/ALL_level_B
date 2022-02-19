@@ -143,7 +143,7 @@ if(!isset($_SESSION['view'])){
         $view=$View->find(['date'=>date("Y-m-d")]);
         $view['total']++;
         $View->save($view);
-        $_SESSION['view']=$_SESSION['total'];
+        $_SESSION['view']=$view['total'];
     }else{
         $View->save(['date'=>date("Y-m-d"),'total'=>1]);
         $_SESSION['view']=1;

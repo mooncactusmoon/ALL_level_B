@@ -20,7 +20,7 @@
 
 	<div id="all">
 		<!-- header -->
-		<?= include_once "front/header.php"; ?>
+		<?php include_once "front/header.php"; ?>
 		<div id="mm">
 			<div class="hal" id="lef">
 				<a class="blo" href="?do=po">分類網誌</a>
@@ -31,9 +31,30 @@
 			</div>
 			<div class="hal" id="main">
 				<div>
-
+<!-- marquee -->	<span style="width:80%; display:inline-block;">
+						<marquee>請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地！詳見最新文章。</marquee>
+					</span>
+				
 					<span style="width:18%; display:inline-block;">
+					<?php
+					if(isset($_SESSION['login'])){
+						if($_SESSION['login']=='admin'){
+							?>
+							歡迎,admin <button onclick="location.href='back.php'">管理</button>|<button onclick="logout()">登出</button>
+							<?php
+						}else{
+							?>
+							歡迎,<?=$_SESSION['login']?><button onclick="logout()">登出</button>
+							<?php
+						}
+			
+					}else{
+						?>
 						<a href="?do=login">會員登入</a>
+						<?php
+					}
+					?>
+						
 					</span>
 					<div class="">
 						<?php
@@ -50,7 +71,7 @@
 			</div>
 		</div>
 		<!-- footer -->
-		<?= include_once "front/footer.php"; ?>
+		<?php include_once "front/footer.php"; ?>
 
 	</div>
 
