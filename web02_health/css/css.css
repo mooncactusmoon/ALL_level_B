@@ -297,3 +297,29 @@ cursor:default;
 	right:0px;
 	margin:auto;
 }
+.tag-list{
+	display:flex;
+	margin-left: 1px;
+}
+.tag{
+	padding: 5px 8px;
+	border: 1px solid #555;
+	margin-left: -1px;
+	background: #ddd;
+	cursor: pointer;
+}
+.tag:hover{
+	background:#CCC;
+	color:white;
+}
+.text{
+	width:95%;
+	padding: 10px;
+	border: 1px solid #555;
+	margin-top: -1px;
+	display: none;
+}
+.active{
+	background: white;
+	border-bottom-color:white;
+}
