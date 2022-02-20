@@ -9,8 +9,8 @@
     </fieldset>
     <fieldset style="width:75%">
         <legend>文章表列</legend>
-        <div id="newList"></div>
-        <div id="news"></div>
+        <div id="newsList"></div>
+        <div id="news" style="display:none"></div>
     </fieldset>
 </div>
 
@@ -18,7 +18,7 @@
     getlist(1)
 
     $(".type").on("click",function(){
-        $("#navtype").text($(this).text());
+        $("#navTag").text($(this).text());
         let type=$(this).attr('id').replace('t','');
         getlist(type)
     })
@@ -33,8 +33,8 @@
     function getnews(id){ //取得指定內容
         $.get("api/getnews.php",{id},(news)=>{
             $("#news").html(news);
-            $("#newsList").hide();
             $("#news").show();
+            $("#newsList").hide();
         })
     }
 </script>
